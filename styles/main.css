@@ -8,6 +8,7 @@
     /* --lightFont: lighter; */
 }
 
+
 html {
     height: 100%;
 }
@@ -30,22 +31,24 @@ body {
     margin: 0;
     padding: 0;
     flex: .5;
-    /* border: 2px solid rgb(31, 48, 54); */
-    /* box-shadow: 1px 1px 1px 1px rgb(96, 159, 161, .1); */
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--darkgrey);
+    border: 2px solid rgb(31, 48, 54);
+    box-shadow: cadetblue;
+    width: 85%;
 }
 
 #header {
     margin: 0;
     padding: 0;
     color: white;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 28px;
     letter-spacing: .1rem;
 }
-
+/* 
 .top-container {
     margin: 0;
     padding: 0;
@@ -55,19 +58,25 @@ body {
     border: 2px solid rgb(31, 48, 54);
     box-shadow: 1px 1px 1px 1px rgb(96, 159, 161, .2);
     display: flex;
-    /* align-items: center; */
     justify-content: center;
-}
+} */
 
 
 .form-container {
-    flex: 1;
-    border: 2px solid green;
+    position: absolute;
+    min-height: 350px;
+    min-width: 200px;
+    border: 1px solid var(--lightgrey);
+    background-color: var(--lightgrey);
+    opacity: 1;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .5s ease-in;
+    z-index: 2;
+    border-radius: 10px;
 }
 
 .form {
@@ -75,13 +84,15 @@ body {
     padding: 0;
     /* flex: 1; */
     width: 100%;
-    height: 100%;
+    min-height: 340px;
+    min-width: 340px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     /* justify-content: center; */
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     gap: 10px;
+    border-radius: 10px;
 }
 
 .title-container, .author-container, .pages-container {
@@ -90,24 +101,31 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 7px;
+    gap: 15px;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
-label {
+.label {
     color: white;
     font-size: 18px;
     margin: 0;
     padding: 0;
     /* width: 50px; */
+    font-weight: 300;
+    width: 50px;
 }
 
-input {
+.input {
     margin: 0;
-    padding: 0;
-    /* width: 100px; */
+    padding: 7px;
+    min-width: 200px;
+    color: black;
+    background-color: white;
+    border: 2px solid var(--darkgrey);
+    color: var(--darkgrey);
+    border-radius: 10px;
 }
 
 .checkbox-container {
@@ -115,11 +133,42 @@ input {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    gap: 15px;
     flex: 1;
+}
+.label-cb {
+    color: white;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+}
+
+.input-cb {
+    margin: 0;
+    padding: 7px;
+    color: black;
+    background-color: white;
+    border: 2px solid var(--darkgrey);
+    color: var(--darkgrey);
+    border-radius: 10px;
+}
+
+.read-container {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.unread-container {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 .submit-container {
     display: flex;
@@ -129,8 +178,19 @@ input {
     gap: 10px;
     margin: 0;
     padding: 0;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     flex: 1;
+}
+
+#submit {
+    background-color: var(--darkgrey);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    /* width: 100%; */
+    margin-bottom:10px;
+    opacity: 0.8;
 }
 
 button {
@@ -138,12 +198,17 @@ button {
     padding: 0;
 }
 
-.body-container {
+.display {
+    display: none;
+}
+
+.main-container {
+    /* position: absolute; */
     margin: 0;
     padding: 0;
-    width: 75%;
-    flex: 1;
-    background-color: var(--lightgrey);
+    width: 85%;
+    flex: 4;
+    /* background-color: var(--lightgrey); */
     border: 2px solid rgb(31, 48, 54);
     box-shadow: cadetblue;
     display: flex;
@@ -152,7 +217,7 @@ button {
 
 .display-book-cards {
     flex: 1;
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
     display: flex;
 }
 
@@ -160,14 +225,14 @@ button {
     flex: 1;
     /* width: 100%;
     height: 100%; */
-    border: 5px solid black;
+    /* border: 5px solid black; */
 }
 
 .new-book-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid white;
+    /* border: 2px solid white; */
     height: 75px;
     /* flex: 1; */
 }
@@ -175,9 +240,14 @@ button {
 #newBookBtn {
     width: 75px;
     height: 35px;
-    background-color: var(--darkgrey);
+    background-color: var(--lightgrey);
     border: 1px solid var(--darkgrey);
     color: white;
     font-size: 1.3em;
     border-radius: 50px;
+}
+
+.blur {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
 }
