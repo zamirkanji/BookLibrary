@@ -35,7 +35,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--darkgrey);
-    border: 2px solid rgb(31, 48, 54);
+    /* border: 2px solid rgb(31, 48, 54); */
     box-shadow: cadetblue;
     width: 85%;
 }
@@ -70,13 +70,35 @@ body {
     background-color: var(--lightgrey);
     opacity: 1;
     margin: 0;
-    padding: 0;
+    padding: 7px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    transition: .5s ease-in;
     z-index: 2;
     border-radius: 10px;
+    transition: .5s ease-in;
+    gap: 15px;
+}
+
+.close-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    
+}
+
+.close-btn {
+    background-color: var(--darkgrey);
+    color: white;
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+    /* width: 100%; */
+    /* margin-bottom:10px; */
+    opacity: 0.8;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
 }
 
 .form {
@@ -120,12 +142,16 @@ body {
 .input {
     margin: 0;
     padding: 7px;
-    min-width: 200px;
+    min-width: 250px;
     color: black;
-    background-color: white;
-    border: 2px solid var(--darkgrey);
-    color: var(--darkgrey);
+    background-color: var(--darkgrey);
+    border: 2px solid var(--lightgrey);
+    color: white;
     border-radius: 10px;
+}
+
+.input:focus {
+    outline: none;
 }
 
 .checkbox-container {
@@ -156,6 +182,10 @@ body {
     border-radius: 10px;
 }
 
+.input-cb:checked {
+
+}
+
 .read-container {
     /* border: 1px solid black; */
     display: flex;
@@ -170,6 +200,31 @@ body {
     align-items: center;
     gap: 15px;
 }
+
+.textbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#notes {
+    margin: 0;
+    /* padding: 0; */
+    min-width: 175px;
+    min-height: 75px;
+    color: black;
+    background-color: var(--darkgrey);
+    border: 2px solid var(--lightgrey);
+    color: white;
+    border-radius: 10px;
+    /* transition: .5s ease-in; */
+}
+
+#notes:hover {
+    border: 1px solid white;
+    /* transition: .5s ease-in; */
+}
+
 .submit-container {
     display: flex;
     flex-direction: row;
@@ -191,6 +246,9 @@ body {
     /* width: 100%; */
     margin-bottom:10px;
     opacity: 0.8;
+    border-radius: 10px;
+    font-size: 1em;
+    text-align: center;
 }
 
 button {
@@ -198,10 +256,11 @@ button {
     padding: 0;
 }
 
-.display {
-    display: none;
-}
 
+
+
+
+/* *************************************************** */
 .main-container {
     /* position: absolute; */
     margin: 0;
@@ -235,11 +294,12 @@ button {
     /* border: 2px solid white; */
     height: 75px;
     /* flex: 1; */
+    /* border: 2px solid rgb(31, 48, 54); */
 }
 
 #newBookBtn {
-    width: 75px;
-    height: 35px;
+    width: 100px;
+    height: 50px;
     background-color: var(--lightgrey);
     border: 1px solid var(--darkgrey);
     color: white;
@@ -250,4 +310,15 @@ button {
 .blur {
     filter: blur(2px);
     -webkit-filter: blur(2px);
+}
+
+
+.card {
+    width: 200px;
+    height: 200px;
+    background-color: var(--lightgrey);
+}
+
+.display-none {
+    display: none;
 }
