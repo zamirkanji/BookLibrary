@@ -5,6 +5,7 @@ const main = document.querySelector('.main-container');
 const formContainer = document.querySelector('.form-container');
 const submitBtn = document.querySelector('#submit');
 const closeBtn = document.querySelector('.close-btn');
+const bookDisplay = document.querySelector('.display-book-cards');
 
 
 //******************************************************** */
@@ -32,28 +33,96 @@ const removeBlur = () => {
 }
 
 //******************************************************** */
-let arrayOfBooks = [];
+const arrayOfBooks = [];
 
 class Book {
-    constructor (title, author, pages, ifRead) {
+    constructor (title, author, pages, read, notes) {
         this.title = title,
         this.author = author, 
-        this.pages = pages 
-        // this.ifRead = ifRead
+        this.pages = pages,
+        this.read = read,
+        this.notes = notes 
+        // this.read = read
     }
 }
 
-const createBook = (title, author, pages) => {
-    // const bookOne = Object.create(Book())
-    const bookOne = new Book(title, author, pages)
-    console.log(bookOne);
-    arrayOfBooks.push(bookOne);
+Book.prototype.toggleRead = function(ifRead) {
+    if (ifRead === "read") {
+
+    }
 }
 
-function addBookToList () {
-    arrayOfBooks.forEach(book => {
+// class Books {
+//     constructor () {
+//         // this.push.book
+//     }
 
-    })
+// }
+
+const createBook = (title, author, pages, read, notes) => {
+    // bookDisplay.classList.remove('display-none');
+    const newBook = new Book(title, author, pages, read, notes);
+    log(newBook);
+    arrayOfBooks.push(newBook);
+    for (const book of arrayOfBooks) {
+        const bookDiv = document.createElement('div');
+
+        const infoContainer = document.createElement('div');
+        const titleHeader = document.createElement('h3');
+        const paraAuthor = document.createElement('p');
+        const paraPages = document.createElement('p');
+        const paraRead = document.createElement('p');
+        
+        const deleteContainer = document.createElement('div');
+        const deleteBookBtn = document.createElement('button');
+        const readToggle = document.createElement('button');
+
+        
+        bookDiv.classList.add('card');
+
+        infoContainer.classList.add('info-container');
+        titleHeader.classList.add('title-header');
+        paraPages.classList.add('pages-text');
+        paraAuthor.classList.add('author-text');
+        paraRead.classList.add('pages-text');
+
+        deleteContainer.classList.add('delete-container');
+        deleteBookBtn.classList.add('delete-book');
+        readToggle.classList.add('read-toggle');
+        
+
+        paraAuthor.textContent = `by ${book.author}`;
+        paraPages.textContent = `${book.pages} pages`;
+        titleHeader.textContent = `${book.title}`;
+        deleteBookBtn.textContent = 'Delete';
+        paraRead.textContent = book.read;
+        
+        if (book.read === "read") {
+            readToggle.textContent = 'Read';
+        } else {
+            readToggle.textContent = 'Not Read';
+        }
+
+        
+        
+        bookDisplay.appendChild(bookDiv);
+
+        bookDiv.appendChild(infoContainer);
+
+        infoContainer.appendChild(titleHeader);
+        infoContainer.appendChild(paraPages);
+        infoContainer.appendChild(paraAuthor);
+        infoContainer.appendChild(paraRead);
+
+        bookDiv.appendChild(deleteContainer);
+        deleteContainer.appendChild(deleteBookBtn);
+        deleteContainer.appendChild(readToggle);
+
+    }
+
+    // deleteBookBtn.addEventListener('click', () => {
+
+    // })
 }
 
 //******************************************************** */
@@ -65,16 +134,19 @@ newBookBtn.addEventListener('click', (e) => {
 })
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
- //css classes
     hideForm();
     removeBlur();
     showNewBookBtn();
 //submit form, logic
+    const myForm = document.querySelector('.form');
     const title = document.querySelector('#title').value;
     const author = document.querySelector('#author').value;
     const pages = document.querySelector('#pages').value;
-    createBook(title, author, pages);
-    
+    const read = document.querySelector('input[name="read"]:checked').value;
+    const notes = document.querySelector('#notes').value;
+    createBook(title, author, +pages, read, notes);
+
+    myForm.reset(); 
 })
 closeBtn.addEventListener('click', (e) => {
     hideForm();

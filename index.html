@@ -32,16 +32,16 @@
             <div class="checkbox-container">
                 <div class="read-container">
                     <label for="read" class="label-cb">Read</label>
-                    <input type="checkbox" id="read" name="read" class="input-cb" value="read">
+                    <input type="radio" id="read" name="read" class="input-cb" value="read" checked>
                 </div>
                 <div class="unread-container">
                     <label for="unread" class="label-cb">Unread</label>
-                    <input type="checkbox" id="unread" name="unread" class="input-cb" value="unread">
+                    <input type="radio" id="unread" name="read" class="input-cb" value="unread">
                 </div>
             </div>
             <div class="textbox-container">
                 <label for="notes" class="label">Notes:</label>
-                <textarea name="notes" id="notes" class="input" cols="40" rows="7"></textarea>
+                <textarea type="text" name="notes" id="notes" class="input" cols="40" rows="7"></textarea>
             </div>
             <div class="submit-container">
                 <button type="submit" id="submit" name="submit" value="Submit">Submit Book</button>
@@ -55,11 +55,6 @@
             <button id="newBookBtn" type="button" name="newBookBtn" value="newBook">+</button>
         </div>
         <div class="display-book-cards">
-            <canvas id="myCanvas">
-                <div class="card display-none">
-
-                </div>
-            </canvas>
         </div>
     </div>
     <script src="script/main.js"></script>
