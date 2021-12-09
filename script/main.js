@@ -12,6 +12,7 @@ const bookDisplay = document.querySelector('.display-book-cards');
 const showForm = () => {
     formContainer.classList.remove('display-none');
 } 
+
 const hideForm = (e) => {
     formContainer.classList.add('display-none');
 } 
@@ -33,7 +34,7 @@ const removeBlur = () => {
 }
 
 //******************************************************** */
-const arrayOfBooks = [];
+// const arrayOfBooks = [];
 
 class Book {
     constructor (title, author, pages, read, notes) {
@@ -52,78 +53,138 @@ Book.prototype.toggleRead = function(ifRead) {
     }
 }
 
-// class Books {
-//     constructor () {
-//         // this.push.book
-//     }
+class Books {
+    constructor () {
+        this.books = [];
+    }
 
-// }
+    addBook (book) {
+        this.books.push(book);
+    }
 
-const createBook = (title, author, pages, read, notes) => {
-    // bookDisplay.classList.remove('display-none');
-    const newBook = new Book(title, author, pages, read, notes);
-    log(newBook);
-    arrayOfBooks.push(newBook);
-    for (const book of arrayOfBooks) {
-        const bookDiv = document.createElement('div');
-
-        const infoContainer = document.createElement('div');
-        const titleHeader = document.createElement('h3');
-        const paraAuthor = document.createElement('p');
-        const paraPages = document.createElement('p');
-        const paraRead = document.createElement('p');
-        
-        const deleteContainer = document.createElement('div');
-        const deleteBookBtn = document.createElement('button');
-        const readToggle = document.createElement('button');
-
-        
-        bookDiv.classList.add('card');
-
-        infoContainer.classList.add('info-container');
-        titleHeader.classList.add('title-header');
-        paraPages.classList.add('pages-text');
-        paraAuthor.classList.add('author-text');
-        paraRead.classList.add('pages-text');
-
-        deleteContainer.classList.add('delete-container');
-        deleteBookBtn.classList.add('delete-book');
-        readToggle.classList.add('read-toggle');
-        
-
-        paraAuthor.textContent = `by ${book.author}`;
-        paraPages.textContent = `${book.pages} pages`;
-        titleHeader.textContent = `${book.title}`;
-        deleteBookBtn.textContent = 'Delete';
-        paraRead.textContent = book.read;
-        
-        if (book.read === "read") {
-            readToggle.textContent = 'Read';
-        } else {
-            readToggle.textContent = 'Not Read';
+    createCard () {
+        for (const book of this.books) {
+            const bookDiv = document.createElement('div');
+    
+            const infoContainer = document.createElement('div');
+            const titleHeader = document.createElement('h3');
+            const paraAuthor = document.createElement('p');
+            const paraPages = document.createElement('p');
+            const paraRead = document.createElement('p');
+            
+            const deleteContainer = document.createElement('div');
+            const deleteBookBtn = document.createElement('button');
+            const readToggle = document.createElement('button');
+    
+            
+            bookDiv.classList.add('card');
+    
+            infoContainer.classList.add('info-container');
+            titleHeader.classList.add('title-header');
+            paraPages.classList.add('pages-text');
+            paraAuthor.classList.add('author-text');
+            paraRead.classList.add('pages-text');
+    
+            deleteContainer.classList.add('delete-container');
+            deleteBookBtn.classList.add('delete-book');
+            readToggle.classList.add('read-toggle');
+            
+    
+            paraAuthor.textContent = `by ${book.author}`;
+            paraPages.textContent = `${book.pages} pages`;
+            titleHeader.textContent = `${book.title}`;
+            deleteBookBtn.textContent = 'Delete';
+            paraRead.textContent = book.read;
+            
+            if (book.read === "read") {
+                readToggle.textContent = 'Read';
+            } else {
+                readToggle.textContent = 'Not Read';
+            }
+    
+            bookDisplay.appendChild(bookDiv);
+            bookDiv.appendChild(infoContainer);
+    
+            infoContainer.appendChild(titleHeader);
+            infoContainer.appendChild(paraPages);
+            infoContainer.appendChild(paraAuthor);
+            infoContainer.appendChild(paraRead);
+    
+            bookDiv.appendChild(deleteContainer);
+            deleteContainer.appendChild(deleteBookBtn);
+            deleteContainer.appendChild(readToggle);
+    
         }
-
-        
-        
-        bookDisplay.appendChild(bookDiv);
-
-        bookDiv.appendChild(infoContainer);
-
-        infoContainer.appendChild(titleHeader);
-        infoContainer.appendChild(paraPages);
-        infoContainer.appendChild(paraAuthor);
-        infoContainer.appendChild(paraRead);
-
-        bookDiv.appendChild(deleteContainer);
-        deleteContainer.appendChild(deleteBookBtn);
-        deleteContainer.appendChild(readToggle);
 
     }
 
-    // deleteBookBtn.addEventListener('click', () => {
-
-    // })
 }
+
+// const createBook = (title, author, pages, read, notes) => {
+//     // bookDisplay.classList.remove('display-none');
+//     const newBook = new Book(title, author, pages, read, notes);
+//     log(newBook);
+//     arrayOfBooks.push(newBook);
+//     for (const book of arrayOfBooks) {
+//         const bookDiv = document.createElement('div');
+
+//         const infoContainer = document.createElement('div');
+//         const titleHeader = document.createElement('h3');
+//         const paraAuthor = document.createElement('p');
+//         const paraPages = document.createElement('p');
+//         const paraRead = document.createElement('p');
+        
+//         const deleteContainer = document.createElement('div');
+//         const deleteBookBtn = document.createElement('button');
+//         const readToggle = document.createElement('button');
+
+        
+//         bookDiv.classList.add('card');
+
+//         infoContainer.classList.add('info-container');
+//         titleHeader.classList.add('title-header');
+//         paraPages.classList.add('pages-text');
+//         paraAuthor.classList.add('author-text');
+//         paraRead.classList.add('pages-text');
+
+//         deleteContainer.classList.add('delete-container');
+//         deleteBookBtn.classList.add('delete-book');
+//         readToggle.classList.add('read-toggle');
+        
+
+//         paraAuthor.textContent = `by ${book.author}`;
+//         paraPages.textContent = `${book.pages} pages`;
+//         titleHeader.textContent = `${book.title}`;
+//         deleteBookBtn.textContent = 'Delete';
+//         paraRead.textContent = book.read;
+        
+//         if (book.read === "read") {
+//             readToggle.textContent = 'Read';
+//         } else {
+//             readToggle.textContent = 'Not Read';
+//         }
+
+        
+        
+//         bookDisplay.appendChild(bookDiv);
+
+//         bookDiv.appendChild(infoContainer);
+
+//         infoContainer.appendChild(titleHeader);
+//         infoContainer.appendChild(paraPages);
+//         infoContainer.appendChild(paraAuthor);
+//         infoContainer.appendChild(paraRead);
+
+//         bookDiv.appendChild(deleteContainer);
+//         deleteContainer.appendChild(deleteBookBtn);
+//         deleteContainer.appendChild(readToggle);
+
+//     }
+
+//     // deleteBookBtn.addEventListener('click', () => {
+
+//     // })
+// }
 
 //******************************************************** */
 newBookBtn.addEventListener('click', (e) => {
@@ -144,7 +205,12 @@ submitBtn.addEventListener('click', (e) => {
     const pages = document.querySelector('#pages').value;
     const read = document.querySelector('input[name="read"]:checked').value;
     const notes = document.querySelector('#notes').value;
-    createBook(title, author, +pages, read, notes);
+
+
+    const books = new Books();
+    books.addBook(new Book(title, author, +pages, read, notes));
+    books.createCard();
+    // createBook(title, author, +pages, read, notes);
 
     myForm.reset(); 
 })
