@@ -42,7 +42,7 @@ class Book {
 	}
 }
 
-Book.prototype.toggleRead = function (ifRead) {
+Book.prototype.setRead = function (ifRead) {
 	if (ifRead === "read") {
 	}
 };
@@ -141,7 +141,7 @@ class Books {
 		log(this.books.data_key);
 	}
 
-	toggleRead(read) {
+	setRead(read) {
 		if (read === "read") {
 			this.read = "Not Read";
 			readToggle.textContent = "Not Read";
@@ -164,6 +164,16 @@ submitBtn.addEventListener("click", (e) => {
 	removeBlur();
 	showNewBookBtn();
 	//submit form, logic
+	createBook();
+	
+});
+closeBtn.addEventListener("click", (e) => {
+	hideForm();
+	removeBlur();
+	showNewBookBtn();
+});
+
+const createBook = () => {
 	const myForm = document.querySelector(".form");
 	const title = document.querySelector("#title").value;
 	const author = document.querySelector("#author").value;
@@ -173,30 +183,24 @@ submitBtn.addEventListener("click", (e) => {
 
 	const books = new Books();
 	books.addBook(new Book(title, author, +pages, read, notes));
-	// books.addKeyToBook();
 	books.createCard();
 	books.addKeyToCard();
 
+	const deleteBtns = document.querySelectorAll(".delete-book");
+			deleteBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+			books.deleteBook(title);
+			log("test delete btn");
+			});
+		});
+
+	const readBtns = document.querySelectorAll(".read-toggle");
+			readBtns.forEach((btn) => {
+			btn.addEventListener("click", () => {
+			books.setRead(read);
+			log("test read btn");
+		});
+	});
 	myForm.reset();
-});
-closeBtn.addEventListener("click", (e) => {
-	hideForm();
-	removeBlur();
-	showNewBookBtn();
-});
+}
 
-const deleteBtns = document.querySelectorAll(".delete-book");
-deleteBtns.forEach((btn) => {
-	btn.addEventListener("click", () => {
-		books.deleteBook(title);
-		log("test delete btn");
-	});
-});
-
-const readBtns = document.querySelectorAll(".read-toggle");
-readBtns.forEach((btn) => {
-	btn.addEventListener("click", (e) => {
-		books.toggleRead(e.target.read);
-		log("test delete btn");
-	});
-});
