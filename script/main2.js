@@ -57,15 +57,6 @@ class Books {
 		this.books.push(book);
 	}
 
-	deleteBook(title) {
-		this.books = this.books.filter((book) => {
-			if (book.title === title) {
-				return false;
-			} 
-		});
-		return this.books;
-	}
-
 	createCard(rkey) {
 		const lastItem = this.books[this.books.length - 1];
 	
@@ -82,6 +73,7 @@ class Books {
 		bookDiv.classList.add("card");
 		bookDiv.setAttribute('data-id', rkey);
 
+
 		infoContainer.classList.add("info-container");
 		titleHeader.classList.add("title-header");
 		paraPages.classList.add("pages-text");
@@ -90,6 +82,7 @@ class Books {
 		deleteContainer.classList.add("delete-container");
 		deleteBookBtn.classList.add("delete-book");
 		readToggle.classList.add("read-toggle");
+		readToggle.setAttribute('data-id', rkey);
 
 		paraAuthor.textContent = `by ${lastItem.author}`;
 		paraPages.textContent = `${lastItem.pages} pages`;
@@ -115,7 +108,59 @@ class Books {
 		deleteContainer.appendChild(deleteBookBtn);
 		deleteContainer.appendChild(readToggle);
 	}
+
+	// getKey () {
+	// 	const bookKey = this.books.forEach(book => book.rkey);
+	// 	log(bookKey);
+	// }
+
+	readBtnListener (rkey) {
+		// this.getKey();
+		// const bookKey = this.getKey;
+		// log(bookKey());
+		this.books.forEach(book => {
+			let bookKey = book.rkey;
+			log(bookKey);
+		});
+
+		const readBtns = document.querySelectorAll(".read-toggle");
+		readBtns.forEach(btn => {
+			btn.addEventListener('click', () => {
+				const btnContent = document.querySelector('.read-toggle').textContent;
+				const btnKey = btn.getAttribute('data-id');
+				log(btnKey);
+				log(btnContent);
+				if(btnContent == "Read" && books.rkey === btnKey) {
+					log('read');
+				} 
+				if(btnContent == "Not Read") {
+					// log('unread');
+				}
+			})
+		})
+	}
+
+	// deleteBtnListener () {
+	// 	const deleteBtns = document.querySelectorAll(".delete-book");
+	// 		deleteBtns.forEach((btn) => {
+	// 			btn.addEventListener("click", () => {
+	// 				if (books.rkey === rkey) {
+	// 					this.books.filter(book => {
+	// 						log('test');
+	// 					})
+	// 				}
+	// 		});
+	// 	});
+		
+	// 	// this.books = this.books.filter((book) => {
+	// 		// 		if (book.title === title) {
+	// 		// 			return false;
+	// 		// 		} 
+	// 		// 		return this.books;
+	// 		// 	});
+	// }
 }
+
 
 
 
@@ -150,29 +195,27 @@ submitBtn.addEventListener("click", (e) => {
 
 	books.addBook(new Book(title, author, +pages, read, notes, rkey));
 	books.createCard(rkey);
+	books.readBtnListener(rkey);
+	btnListeners(rkey);
 	resetForm();
 
-	const deleteBtns = document.querySelectorAll(".delete-book");
-	deleteBtns.forEach((btn) => {
-		btn.addEventListener("click", () => {
-			books.deleteBook(title);
-		});
-	});	
-	const readBtns = document.querySelectorAll(".read-toggle");
-	readBtns.forEach((btn) => {
-		btn.addEventListener("click", () => {
-			const readToggle = document.querySelector('.read-toggle');
-			if (read === "read") {
-				// read = "unread";
-				readToggle.textContent = "Not Read";
-			} 
-			if (read === "unread") {
-				// Book.read = "read";
-				readToggle.textContent = "Read";
-			}
-		});
-	});
+	
+	
 });
+
+const btnListeners = (rkey) => {
+
+	const deleteBtns = document.querySelectorAll(".delete-book");
+			deleteBtns.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					if (books.rkey === rkey) {
+						this.books.filter(book => {
+							log('test');
+						})
+					}
+			});
+		});
+}
 
 const resetForm = () => {
 	myForm.reset();
