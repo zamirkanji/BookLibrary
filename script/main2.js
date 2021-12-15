@@ -110,18 +110,35 @@ class Books {
 	}
 
 	
-	readBtnListener (btnKey) {
-		const btnContent = document.querySelector('.read-toggle').textContent;
-		const isKey = (book) => {
-			return book.rkey == btnKey;
-		}
-		const thisBook = this.books.find(isKey);
-		if (thisBook.read === 'read') {
-			thisBook.read = 'unread';
-		} else {
-			thisBook.read = 'read';
-		}
-		log(btnContent);
+	readBtnListener () {
+		const btnRead = document.querySelectorAll('.read-toggle');
+		btnRead.forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const btnKey = btn.getAttribute('data-id');
+
+				const isKey = (book) => book.rkey == btnKey;
+				const thisBook = this.books.find(isKey);
+
+				// const btnKey = btn.getAttribute('data-id');
+				// const thisBook = books.getKey(btnKey);
+				// log(thisBook);
+
+				log(thisBook);
+				if (e.target.textContent === 'Read') {
+					e.target.textContent = 'Not Read';
+					thisBook.read = 'unread';
+				}	
+				if (e.target.textContent === 'Not Read') {
+					e.target.textContent = 'Read';
+					thisBook.read = 'read';
+				}	
+			})
+		})
+	}
+
+	getKey (btnKey) {
+		const isKey = (book) => book.rkey == btnKey;
+		return this.books.find(isKey);
 	}
 
 	// deleteBtn (btnKey) {
@@ -167,16 +184,9 @@ submitBtn.addEventListener("click", (e) => {
 	
 	books.addBook(new Book(title, author, +pages, read, notes, rkey));
 	books.createCard(rkey);
+	books.readBtnListener();
 	log(books);
 	resetForm();
-
-	const readBtn = document.querySelectorAll('.read-toggle');
-	readBtn.forEach(btn => {
-		btn.addEventListener('click', () => {
-			const btnKey = btn.getAttribute('data-id');
-			books.readBtnListener(btnKey);
-		})
-	})
 
 	const deleteBtns = document.querySelectorAll(".delete-book");
 	deleteBtns.forEach((btn) => {
@@ -188,6 +198,8 @@ submitBtn.addEventListener("click", (e) => {
 	
 	
 });
+
+
 
 const resetForm = () => {
 	myForm.reset();
