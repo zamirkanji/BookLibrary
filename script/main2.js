@@ -72,7 +72,9 @@ class Books {
 		const paraRead = document.createElement("p");
 		const deleteContainer = document.createElement("div");
 		const deleteBookBtn = document.createElement("button");
+
 		const readToggle = document.createElement("button");
+		// readToggle.addEventListener('click', this.readBtnListener);
 
 		bookDiv.classList.add("card");
 		infoContainer.classList.add("info-container");
@@ -136,6 +138,31 @@ class Books {
 		})
 	}
 
+	// readBtnListener = (e) => {
+	// 	const btnRead = document.querySelectorAll('.read-toggle');
+	// 	btnRead.forEach(btn => {
+	// 	// 	btn.addEventListener('click', (e) => {
+	// 		const btnKey = btn.getAttribute('data-id');
+	
+	// 		const isKey = (book) => book.rkey == btnKey;
+	// 		const thisBook = this.books.find(isKey);
+	
+	// 		log(thisBook);
+	// 		if (thisBook) {
+	// 			if (btn.textContent === 'Read') {
+	// 				btn.textContent = 'Not Read';
+	// 				thisBook.read = 'unread';
+	// 			}	
+	// 		}
+	// 		if (thisBook) {
+	// 			if (btn.textContent === 'Not Read') {
+	// 				btn.textContent = 'Read';
+	// 				thisBook.read = 'read';
+	// 			}	
+	// 		}
+	// 	})
+	// }
+
 	getKey (btnKey) {
 		const isKey = (book) => book.rkey == btnKey;
 		return this.books.find(isKey);
@@ -150,6 +177,7 @@ class Books {
 	// 	})
 	// }
 }
+
 
 
 
@@ -184,9 +212,33 @@ submitBtn.addEventListener("click", (e) => {
 	
 	books.addBook(new Book(title, author, +pages, read, notes, rkey));
 	books.createCard(rkey);
-	books.readBtnListener();
+	// books.readBtnListener();
+	btnListeners();
 	log(books);
 	resetForm();
+
+	
+	
+	
+});
+
+const btnListeners = () => {
+	const btnRead = document.querySelectorAll('.read-toggle');
+		btnRead.forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const btnKey = btn.getAttribute('data-id');
+				const thisObj = books.getKey(btnKey);
+				log(thisObj, thisObj.read);
+
+				if (thisObj.read === 'read') {
+					btn.textContent = 'Not Read';
+					thisObj.read = 'unread';
+				} else {
+					btn.textContent = 'Read';
+					thisObj.read = 'read';
+				}
+			})
+		})
 
 	const deleteBtns = document.querySelectorAll(".delete-book");
 	deleteBtns.forEach((btn) => {
@@ -195,9 +247,7 @@ submitBtn.addEventListener("click", (e) => {
 			books.deleteBtn(btnKey);
 		})
 	})
-	
-	
-});
+}
 
 
 
